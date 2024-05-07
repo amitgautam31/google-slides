@@ -46,7 +46,10 @@ export async function POST(request: Request) {
         },
       }
     );
-    const data = await res.json();
+    const result = await res.json();
+    const data = result.slides.map((slide: any, index: number) => {
+      return { ...slide, url: slide?.slideProperties?.pageElements?.[0]?.pageUrl, slideNumber: index + 1 }
+    })
 
 
 
